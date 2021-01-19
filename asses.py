@@ -25,7 +25,7 @@ from PIL import Image, ImageTk
 root =Tk()
 root.title("ROSA - i")
 
-root.geometry("730x350+28+28")
+root.geometry("730x360+28+28")
 root.configure(background="white")
 
 
@@ -40,7 +40,7 @@ f1.place(relwidth=1,relheight=1)
 
 
 
-label=Label(f1,text="R O S A - i",font=("comicsansms"," 69", "bold"),fg="#db04a6",background="white")
+label=Label(f1,text="R O S A - i",font=("comicsansms"," 68", "bold"),fg="#db04a6",background="white")
 label.place(relx=-0.25,relwidth=1.5,relheight=0.2)
 
 pic1=PhotoImage(file="TEACH1.png")
@@ -65,7 +65,7 @@ def when_teach():
     #when creating loop windows ,we must give >> toplevel<< instead creating simple window...
 
     #window.geometry("900x600")
-    window.geometry("730x330+28+28")
+    window.geometry("730x360+28+28")
     window.configure(bg="white")   #so here,background will be red as bg=red...
     #l11=Label(root,text="R O S A -i",font=("times new roman","39","bold"),bg="white",fg="pink")
     #the above code writes a text creating label and for the texts ,the dimensions are given...
@@ -217,7 +217,7 @@ def whenopen():
 
     window2=Toplevel()
 
-    window2.geometry("730x330+28+28")
+    window2.geometry("730x360+28+28")
     window2.configure(background="white")
 
 
@@ -354,7 +354,7 @@ def whenopen():
 def whenhelp():
     window3=Toplevel()
 
-    window3.geometry("730x330+28+28")
+    window3.geometry("730x360+28+28")
     window3.configure(background="white")
 
     global wifi1
@@ -398,20 +398,20 @@ def whenhelp():
 
 ###################################################################################33
 b1=Button(f1,image=pic1,border=0,bg="white",command=when_teach,cursor="hand2")
-b1.place(relx=0.05,rely=0.25,relwidth=0.43,relheight=0.29)
+b1.place(relx=0.05,rely=0.25,relwidth=0.44,relheight=0.30)
 
 b2=Button(f1,image=openpicc,border=0,bg="white",command=whenopen,cursor="dot")
-b2.place(relx=0.52,rely=0.25,relwidth=0.43,relheight=0.29)
+b2.place(relx=0.52,rely=0.25,relwidth=0.44,relheight=0.30)
 
 
 
 b3=Button(f1,image=helppicc,border=0,bg="white",command=whenhelp,cursor="man")
-b3.place(relx=0.05,rely=0.6,relwidth=0.43,relheight=0.29)
+b3.place(relx=0.05,rely=0.6,relwidth=0.44,relheight=0.30)
 
 
 
 b4=Button(f1,image=toolspicc,border=0,bg="white",cursor="diamond_cross")
-b4.place(relx=0.52,rely=0.6,relwidth=0.43,relheight=0.29)
+b4.place(relx=0.52,rely=0.6,relwidth=0.44,relheight=0.30)
 
 root.mainloop()
 
