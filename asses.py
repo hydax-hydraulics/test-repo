@@ -73,7 +73,7 @@ def when_teach():
 
     view1=PhotoImage(file="viewpic.png")
     live1=PhotoImage(file="livepic.png")
-    circle1=PhotoImage(file="circle-cropped.png")
+    circle1=PhotoImage(file="newbackbutton.png")
     one1=PhotoImage(file="11.png")
     two1=PhotoImage(file="22.png")
     three1=PhotoImage(file="33.png")
@@ -224,7 +224,7 @@ def whenopen():
 
 
     """list1=PhotoImage(file="listpic.png")
-    circle1=PhotoImage(file="circle-cropped.png")
+    circle1=PhotoImage(file="newbackbutton.png")
     one1=PhotoImage(file="11.png")
     two1=PhotoImage(file="22.png")
     three1=PhotoImage(file="33.png")
@@ -248,15 +248,15 @@ def whenopen():
         global cam
         cam.release()
         
-    circle1=PhotoImage(file="circle-cropped.png")
+    circle1=PhotoImage(file="newbackbutton.png")
     circle1btn=Button(window2,image=circle1,border=0,bg="white",command=close)
     circle1btn.image=circle1
     circle1btn.place(relx=0.1,rely=0.89,relwidth=0.13,relheight=0.09)
 
-    test1=PhotoImage(file="TESTBUTTON.png")
+    test1=PhotoImage(file="test1.png")
     b1=Button(window2,image=test1,border=0,bg="white")
     b1.image=test1
-    b1.place(relx=0.60,rely=0.78,relwidth=0.17,relheight=0.099)
+    b1.place(relx=0.65,rely=0.74,relwidth=0.10,relheight=0.15)
 
 
     def getting_live():
@@ -280,7 +280,7 @@ def whenopen():
     
 
 
-    live1=PhotoImage(file="livepic1.png")
+    live1=PhotoImage(file="live1.png")
     b2=Button(window2,image=live1,border=0,bg="white",command=getting_live)
     b2.place(relx=0.76,rely=0.78,relwidth=0.17,relheight=0.1)
 
@@ -390,7 +390,7 @@ def whenhelp():
     conn1btn.place(relx=0.4,rely=0.6,relwidth=0.49,relheight=0.12)
 
 
-    circle1=PhotoImage(file="circle-cropped.png")
+    circle1=PhotoImage(file="newbackbutton.png")
     circle1btn=Button(window3,image=circle1,border=0,bg="white",command=window3.destroy)
     circle1btn.image= circle1
     circle1btn.place(relx=0.1,rely=0.75,relwidth=0.21,relheight=0.1)
