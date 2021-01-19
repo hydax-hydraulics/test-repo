@@ -25,7 +25,7 @@ from PIL import Image, ImageTk
 root =Tk()
 root.title("ROSA - i")
 
-root.geometry("730x330+28+28")
+root.geometry("730x350+28+28")
 root.configure(background="white")
 
 
