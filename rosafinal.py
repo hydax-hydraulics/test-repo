@@ -245,7 +245,6 @@ def whenopen():
 
     def close():
         window2.destroy()
-        global cam
         cam.release()
         
     circle1=PhotoImage(file="circle-cropped.png")
@@ -260,22 +259,44 @@ def whenopen():
 
 
     def getting_live():
+        global cam
         
         cam=cv2.VideoCapture(0)
         while True:
-            _,img=cam.read()
-            img1=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-            img=ImageTk.PhotoImage(Image.fromarray(img1))
+            
+
+            _,frame=cam.read()
+            hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+
+            lower_red=np.array([30,150,50])
+            upper_red=np.array([255,255,180])
+
+            mask=cv2.inRange(hsv,lower_red, upper_red)
+
+            res=cv2.bitwise_and(frame,frame,mask=mask)
+
+            #cv2.imshow("original",frame)
+
+            edges=cv2.Canny(frame,100,200)
+            #cv2.imshow("Edges",edges)
+            #img1=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+            img=ImageTk.PhotoImage(Image.fromarray(edges))
+            #this is the step where we can work with label tkinter and opencv
+            
+            
             label1["image"]=img
 
-            key = cv2.waitKey(1)
-            if key==27:
-                break
+            key = cv2.waitKey(10) & 0xFF 
+            if key==32:
+                break #this is space key
+                cam.release()
+                
             
 
             window2.update()
+            #cam.release()
 
-        cam.release()
+        #cam.release()
         cv2.destroyAllWindows()
     
 
@@ -285,12 +306,14 @@ def whenopen():
     b2.place(relx=0.76,rely=0.78,relwidth=0.17,relheight=0.1)
 
     def displaypic1():
+        cam.release()
         fla=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(fla)
         img.thumbnail((350,500))
         img1=ImageTk.PhotoImage(img)
         label1.configure(image=img1)
         label1.image=img1
+
         
 
 
@@ -301,6 +324,7 @@ def whenopen():
 
     
     def displaypic2():
+        cam.release()
         flb=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(flb)
         img.thumbnail((350,500))
@@ -311,6 +335,7 @@ def whenopen():
     
     
     def displaypic3():
+        cam.release()
         flc=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(flc)
         img.thumbnail((350,500))
@@ -320,6 +345,7 @@ def whenopen():
 
 
     def displaypic4():
+        cam.release()
         fld=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(fld)
         img.thumbnail((350,500))

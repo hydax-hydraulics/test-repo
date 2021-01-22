@@ -85,26 +85,19 @@ def when_teach():
 
 
     f1=LabelFrame(window,bg="white",border=0)#.pack(padx=50,pady=8,fill=X)
-    f1.place(relx=0.05,rely=0.2,relwidth=0.9,relheight=0.55)
+    f1.place(relx=0.2,rely=0.2,relwidth=0.76,relheight=0.73)
 
     l1=Label(f1,bg="pink",border=5) #here the line in the border is pink in color
     l1.pack()
 
-    #cap=cv2.VideoCapture(0)
 
-    #bt1=Button(window,image=view1,border=0,bg="white")
-    #bt1.place(relx=0.1,rely=0.78,relwidth=0.17,relheight=0.099)
-
-
-    #bt1=Button(window,image=live1,border=0,bg="white")
-    #bt1.place(relx=0.28,rely=0.78,relwidth=0.17,relheight=0.099)
 
     def close():
         cam.release()
         window.destroy()
 
     bt1=Button(window,image=circle1,border=0,bg="white",command=close)
-    bt1.place(relx=0.1,rely=0.89,relwidth=0.13,relheight=0.09)
+    bt1.place(relx=0.04,rely=0.80,relwidth=0.13,relheight=0.09)
 
 
 
@@ -112,22 +105,22 @@ def when_teach():
         donesym1=PhotoImage(file="donesymbol1.png")
         btt1=Button(window,image=donesym1)
         btt1.image=donesym1
-        btt1.place(relx=0.33,rely=0.89,relwidth=0.06,relheight=0.08)
+        btt1.place(relx=0.061,rely=0.25,relwidth=0.06,relheight=0.08)
 
 
     def twodone():
         bt2=Button(window,image=donesym1)
-        bt2.place(relx=0.43,rely=0.89,relwidth=0.06,relheight=0.08)
+        bt2.place(relx=0.061,rely=0.35,relwidth=0.06,relheight=0.08)
 
     
 
     def threedone():
         bt3=Button(window,image=donesym1)
-        bt3.place(relx=0.53,rely=0.89,relwidth=0.06,relheight=0.08)
+        bt3.place(relx=0.061,rely=0.45,relwidth=0.06,relheight=0.08)
 
     def fourdone():
         bt4=Button(window,image=donesym1)
-        bt4.place(relx=0.63,rely=0.89,relwidth=0.06,relheight=0.08)
+        bt4.place(relx=0.061,rely=0.55,relwidth=0.06,relheight=0.08)
 
     def firstphoto():
         image=Image.fromarray(img1)
@@ -155,16 +148,16 @@ def when_teach():
 
 
     bt1=Button(window,image=one1,border=0,bg="white", command=lambda:[firstphoto(),onedone()])
-    bt1.place(relx=0.33,rely=0.89,relwidth=0.06,relheight=0.08)
+    bt1.place(relx=0.061,rely=0.25,relwidth=0.06,relheight=0.08)
 
     bt2=Button(window,image=two1,border=0,bg="white",command=lambda :[secondphoto(),twodone()])
-    bt2.place(relx=0.43,rely=0.89,relwidth=0.06,relheight=0.08)
+    bt2.place(relx=0.061,rely=0.39,relwidth=0.06,relheight=0.08)
 
     bt3=Button(window,image=three1,border=0,bg="white",command=lambda :[thirdphoto(),threedone()])
-    bt3.place(relx=0.53,rely=0.89,relwidth=0.06,relheight=0.08)
+    bt3.place(relx=0.061,rely=0.53,relwidth=0.06,relheight=0.08)
 
     bt4=Button(window,image=four1,border=0,bg="white",command=lambda :[fourthphoto(),fourdone()])
-    bt4.place(relx=0.63,rely=0.89,relwidth=0.06,relheight=0.08)
+    bt4.place(relx=0.061,rely=0.67,relwidth=0.06,relheight=0.08)
 
     cam = cv2.VideoCapture(0)
     while True:
@@ -233,11 +226,11 @@ def whenopen():
 
 
 
-    label1=Label(window2,text="R O S A - i",fg="#db04a6",bg="white",font=("comicsansms"," 40", "bold"))
-    label1.place(relx=0.0,rely=-0.3,relwidth=1,relheight=0.9)
+    label1=Label(window2,text="R O S A - i",fg="#db04a6",bg="white",font=("comicsansms"," 38", "bold"))
+    label1.place(relx=0.0,rely=-0.35,relwidth=1,relheight=0.9)
 
     ft2=Frame(window2,bg="white",padx=25)
-    ft2.place(relx=0.05,rely=0.2,relwidth=0.9,relheight=0.51)
+    ft2.place(relx=0.16,rely=0.2,relwidth=0.75,relheight=0.78)
 
 
     bt1= Label(ft2,border=0,bg="pink")
@@ -245,46 +238,58 @@ def whenopen():
 
     def close():
         window2.destroy()
-        global cam
         cam.release()
         
     circle1=PhotoImage(file="newbackbutton.png")
     circle1btn=Button(window2,image=circle1,border=0,bg="white",command=close)
     circle1btn.image=circle1
-    circle1btn.place(relx=0.1,rely=0.89,relwidth=0.13,relheight=0.09)
+    circle1btn.place(relx=0.04,rely=0.80,relwidth=0.13,relheight=0.09)
 
     test1=PhotoImage(file="test1.png")
     b1=Button(window2,image=test1,border=0,bg="white")
     b1.image=test1
-    b1.place(relx=0.65,rely=0.74,relwidth=0.10,relheight=0.15)
+    b1.place(relx=0.04,rely=0.41,relwidth=0.14,relheight=0.15)
 
 
     def getting_live():
+        global cam
         
         cam=cv2.VideoCapture(0)
         while True:
-            _,img=cam.read()
-            img1=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-            img=ImageTk.PhotoImage(Image.fromarray(img1))
+            _,frame =cam.read()
+            hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+
+            lower_red=np.array([30,150,50])
+            upper_red=np.array([255,255,180])
+
+            mask=cv2.inRange(hsv,lower_red, upper_red)
+
+            res=cv2.bitwise_and(frame,frame,mask=mask)
+
+            edges=cv2.Canny(frame,100,200)
+            img=ImageTk.PhotoImage(Image.fromarray(edges))
+            
+            
             label1["image"]=img
 
-            key = cv2.waitKey(1)
-            if key==27:
+            key = cv2.waitKey(1) & 0xFF
+            if key==32:
                 break
             
 
             window2.update()
 
-        cam.release()
+        
         cv2.destroyAllWindows()
     
 
 
     live1=PhotoImage(file="live1.png")
     b2=Button(window2,image=live1,border=0,bg="white",command=getting_live)
-    b2.place(relx=0.76,rely=0.78,relwidth=0.17,relheight=0.1)
+    b2.place(relx=0.04,rely=0.23,relwidth=0.13,relheight=0.09)
 
     def displaypic1():
+        cam.release()
         fla=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(fla)
         img.thumbnail((350,500))
@@ -301,6 +306,7 @@ def whenopen():
 
     
     def displaypic2():
+        cam.release()
         flb=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(flb)
         img.thumbnail((350,500))
@@ -311,6 +317,7 @@ def whenopen():
     
     
     def displaypic3():
+        cam.release()
         flc=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(flc)
         img.thumbnail((350,500))
@@ -320,6 +327,7 @@ def whenopen():
 
 
     def displaypic4():
+        cam.release() 
         fld=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
         img=Image.open(fld)
         img.thumbnail((350,500))
@@ -331,22 +339,22 @@ def whenopen():
     one1=PhotoImage(file="11.png")
     onne1btn=Button(window2,image=one1,border=0,bg="white",command=displaypic1)
     onne1btn.image=one1
-    onne1btn.place(relx=0.33,rely=0.89,relwidth=0.06,relheight=0.08)
+    onne1btn.place(relx=0.89,rely=0.21,relwidth=0.06,relheight=0.08)
 
     two1=PhotoImage(file="22.png")
     two1btn=Button(window2,image=two1,border=0,bg="white",command=displaypic2)
     two1btn.image=two1
-    two1btn.place(relx=0.43,rely=0.89,relwidth=0.06,relheight=0.08)
+    two1btn.place(relx=0.89,rely=0.41,relwidth=0.06,relheight=0.08)
 
     three1=PhotoImage(file="33.png")
     three1btn=Button(window2,image=three1,border=0,bg="white",command=displaypic3)
     three1btn.image=three1
-    three1btn.place(relx=0.53,rely=0.89,relwidth=0.06,relheight=0.08)
+    three1btn.place(relx=0.89,rely=0.61,relwidth=0.06,relheight=0.08)
 
     four1=PhotoImage(file="44.png")
     four1btn=Button(window2,image=four1,border=0,bg="white",command=displaypic4)
     four1btn.image=four1
-    four1btn.place(relx=0.63,rely=0.89,relwidth=0.06,relheight=0.08)
+    four1btn.place(relx=0.89,rely=0.81,relwidth=0.06,relheight=0.08)
 
 
 #####################################################################################################################################################
