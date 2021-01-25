@@ -78,7 +78,7 @@ def when_teach():
     two1=PhotoImage(file="22.png")
     three1=PhotoImage(file="33.png")
     four1=PhotoImage(file="44.png")
-    donesym1=PhotoImage(file="donesymbol1.png")
+    donesym1=PhotoImage(file="doonesymbol.png")
 
     label1=Label(window,text="R O S A - i",fg="#db04a6",bg="white",font=("comicsansms"," 40", "bold")).pack()
     #label1.place(relx=0.0,rely=-0.3,relwidth=1,relheight=0.9)
@@ -102,7 +102,7 @@ def when_teach():
 
 
     def onedone():
-        donesym1=PhotoImage(file="donesymbol1.png")
+        donesym1=PhotoImage(file="doonesymbol.png")
         btt1=Button(window,image=donesym1)
         btt1.image=donesym1
         btt1.place(relx=0.061,rely=0.25,relwidth=0.06,relheight=0.08)
