@@ -214,6 +214,7 @@ def whenopen():
     global four1
     global test1
     global live1
+    
 
     window2=Toplevel()
 
