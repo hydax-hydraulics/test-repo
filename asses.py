@@ -17,7 +17,7 @@ from tkinter import filedialog
 
 import cv2
 import numpy as np
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk,ImageChops
 
 #HEIGHT=600
 #WIDTH=800
@@ -110,40 +110,45 @@ def when_teach():
 
     def twodone():
         bt2=Button(window,image=donesym1)
-        bt2.place(relx=0.061,rely=0.35,relwidth=0.06,relheight=0.08)
+        bt2.place(relx=0.061,rely=0.39,relwidth=0.06,relheight=0.08)
 
     
 
     def threedone():
         bt3=Button(window,image=donesym1)
-        bt3.place(relx=0.061,rely=0.45,relwidth=0.06,relheight=0.08)
+        bt3.place(relx=0.061,rely=0.53,relwidth=0.06,relheight=0.08)
 
     def fourdone():
         bt4=Button(window,image=donesym1)
-        bt4.place(relx=0.061,rely=0.55,relwidth=0.06,relheight=0.08)
+        bt4.place(relx=0.061,rely=0.67,relwidth=0.06,relheight=0.08)
 
     def firstphoto():
         image=Image.fromarray(img1)
-        file="C:/Users/acer/Desktop/rossa-i/img00"+".jpg"   #file name 
-        cv2.imwrite(file,img1) 
+        img_canny=cv2.Canny(img1,100,200)
+
+        file="C:/Users/acer/Desktop/train/img00_canny"+".jpg"   #file name 
+        cv2.imwrite(file,img_canny) 
         #time=str(datetime.datetime.now().today()).replace(":"," ") +".jpg"
         #image.save(time)  
 
 
     def secondphoto():
         image=Image.fromarray(img1)
-        file="C:/Users/acer/Desktop/rossa-i/img01"+".jpg"
-        cv2.imwrite(file,img1)
+        img_canny=cv2.Canny(img1,100,200)
+        file="C:/Users/acer/Desktop/train/img01_canny"+".jpg"
+        cv2.imwrite(file,img_canny)
 
     def thirdphoto():
         image=Image.fromarray(img1)
-        file="C:/Users/acer/Desktop/rossa-i/img02"+".jpg"
-        cv2.imwrite(file,img1)
+        img_canny=cv2.Canny(img1,100,200)
+        file="C:/Users/acer/Desktop/train/img02_canny"+".jpg"
+        cv2.imwrite(file,img_canny)
 
     def fourthphoto():
         image=Image.fromarray(img1)
-        file="C:/Users/acer/Desktop/rossa-i/img03"+".jpg"
-        cv2.imwrite(file,img1)
+        img_canny=cv2.Canny(img1,100,200)
+        file="C:/Users/acer/Desktop/train/img03_canny"+".jpg"
+        cv2.imwrite(file,img_canny)
 
 
 
@@ -245,47 +250,74 @@ def whenopen():
     circle1btn.image=circle1
     circle1btn.place(relx=0.04,rely=0.80,relwidth=0.13,relheight=0.09)
 
+    def testing():
+        #cam.release()
+        
+        image=Image.fromarray(edges)
+        file="C:/Users/acer/Desktop/test/img00"+".jpg"   #file name 
+        cv2.imwrite(file,edges)
+
+        fla=filedialog.askopenfilename(initialdir="C:/Users/acer/Desktop/test",title="select the image")
+        flb=filedialog.askopenfilename(initialdir="C:/Users/acer/Desktop/train",title="select the image")
+
+        img1=Image.open(fla)
+        img2=Image.open(flb)
+
+        diff=ImageChops.difference(img1,img2)
+        #file1="C:/Users/acer/Desktop/show/img000"+".jpg"
+        #cv2.imwrite(file1,diff)
+
+        if diff.getbbox():
+            diff.show()
+            diff.save("C:/Users/acer/Desktop/show/img000"+".jpg")
+
+
+
+         
+
     test1=PhotoImage(file="test1.png")
-    b1=Button(window2,image=test1,border=0,bg="white")
+    b1=Button(window2,image=test1,border=0,bg="white",command=testing)
     b1.image=test1
-    b1.place(relx=0.04,rely=0.41,relwidth=0.14,relheight=0.15)
-
-
-    def getting_live():
-        global cam
-        
-        cam=cv2.VideoCapture(0)
-        while True:
-            _,frame =cam.read()
-            hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-
-            lower_red=np.array([30,150,50])
-            upper_red=np.array([255,255,180])
-
-            mask=cv2.inRange(hsv,lower_red, upper_red)
-
-            res=cv2.bitwise_and(frame,frame,mask=mask)
-
-            edges=cv2.Canny(frame,100,200)
-            img=ImageTk.PhotoImage(Image.fromarray(edges))
-            
-            
-            label1["image"]=img
-
-            key = cv2.waitKey(1) & 0xFF
-            if key==32:
-                break
-            
-
-            window2.update()
+    b1.place(relx=0.04,rely=0.41,relwidth=0.10,relheight=0.17)
 
         
-        cv2.destroyAllWindows()
+    cam=cv2.VideoCapture(0)
+    while True:
+        _,frame =cam.read()
+        hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+
+        lower_red=np.array([30,150,50])
+        upper_red=np.array([255,255,180])
+
+        mask=cv2.inRange(hsv,lower_red, upper_red)
+
+        res=cv2.bitwise_and(frame,frame,mask=mask)
+        
+
+        edges=cv2.Canny(frame,100,200)
+
+        img=ImageTk.PhotoImage(Image.fromarray(edges))
+
+
+
+        #img=ImageTk.PhotoImage(Image.fromarray(imgg))
+
+
+        bt1["image"]=img
+        key = cv2.waitKey(1) & 0xFF
+        if key==32:
+            break
+            
+
+        window2.update()
+
+        
+    cv2.destroyAllWindows()
     
 
 
     live1=PhotoImage(file="live1.png")
-    b2=Button(window2,image=live1,border=0,bg="white",command=getting_live)
+    b2=Button(window2,image=live1,border=0,bg="white")
     b2.place(relx=0.04,rely=0.23,relwidth=0.13,relheight=0.09)
 
     def displaypic1():
@@ -305,60 +337,9 @@ def whenopen():
     label1.place(relx=0.01,rely=0.01,relwidth=0.98,relheight=0.98)
 
     
-    def displaypic2():
-        cam.release()
-        flb=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
-        img=Image.open(flb)
-        img.thumbnail((350,500))
-        img1=ImageTk.PhotoImage(img)
-        label1.configure(image=img1)
-        label1.image=img1
-       
-    
-    
-    def displaypic3():
-        cam.release()
-        flc=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
-        img=Image.open(flc)
-        img.thumbnail((350,500))
-        img1=ImageTk.PhotoImage(img)
-        label1.configure(image=img1)
-        label1.image=img1
 
 
-    def displaypic4():
-        cam.release() 
-        fld=filedialog.askopenfilename(initialdir=os.getcwd(),title="select the image")
-        img=Image.open(fld)
-        img.thumbnail((350,500))
-        img1=ImageTk.PhotoImage(img)
-        label1.configure(image=img1)
-        label1.image=img1
-
-
-    one1=PhotoImage(file="11.png")
-    onne1btn=Button(window2,image=one1,border=0,bg="white",command=displaypic1)
-    onne1btn.image=one1
-    onne1btn.place(relx=0.89,rely=0.21,relwidth=0.06,relheight=0.08)
-
-    two1=PhotoImage(file="22.png")
-    two1btn=Button(window2,image=two1,border=0,bg="white",command=displaypic2)
-    two1btn.image=two1
-    two1btn.place(relx=0.89,rely=0.41,relwidth=0.06,relheight=0.08)
-
-    three1=PhotoImage(file="33.png")
-    three1btn=Button(window2,image=three1,border=0,bg="white",command=displaypic3)
-    three1btn.image=three1
-    three1btn.place(relx=0.89,rely=0.61,relwidth=0.06,relheight=0.08)
-
-    four1=PhotoImage(file="44.png")
-    four1btn=Button(window2,image=four1,border=0,bg="white",command=displaypic4)
-    four1btn.image=four1
-    four1btn.place(relx=0.89,rely=0.81,relwidth=0.06,relheight=0.08)
-
-
-#####################################################################################################################################################
-############################################################################################################
+####################################################################################################################################################
 def whenhelp():
     window3=Toplevel()
 
@@ -381,27 +362,27 @@ def whenhelp():
     wifi1=PhotoImage(file="wifipic.png")
     wifi1btn=Button(window3,image=wifi1,border=0,bg="white")
     wifi1btn.image=wifi1
-    wifi1btn.place(relx=0.4,rely=0.31,relwidth=0.49,relheight=0.12)
+    wifi1btn.place(relx=0.4,rely=0.31,relwidth=0.396,relheight=0.12)
 
 
 
     pass1=PhotoImage(file="passpic.png")
     pass1btn=Button(window3,image=pass1,border=0,bg="white")
     pass1btn.image=pass1
-    pass1btn.place(relx=0.4,rely=0.45,relwidth=0.49,relheight=0.12)
+    pass1btn.place(relx=0.4,rely=0.45,relwidth=0.38,relheight=0.12)
 
 
 
     conn1=PhotoImage(file="connpic.png")
     conn1btn=Button(window3,image=conn1,border=0,bg="white")
     conn1btn.image=conn1
-    conn1btn.place(relx=0.4,rely=0.6,relwidth=0.49,relheight=0.12)
+    conn1btn.place(relx=0.4,rely=0.6,relwidth=0.39,relheight=0.12)
 
 
     circle1=PhotoImage(file="newbackbutton.png")
     circle1btn=Button(window3,image=circle1,border=0,bg="white",command=window3.destroy)
     circle1btn.image= circle1
-    circle1btn.place(relx=0.1,rely=0.75,relwidth=0.21,relheight=0.1)
+    circle1btn.place(relx=0.1,rely=0.75,relwidth=0.14,relheight=0.09)
 
 
 ###################################################################################33
@@ -409,12 +390,12 @@ b1=Button(f1,image=pic1,border=0,bg="white",command=when_teach,cursor="hand2")
 b1.place(relx=0.05,rely=0.25,relwidth=0.44,relheight=0.30)
 
 b2=Button(f1,image=openpicc,border=0,bg="white",command=whenopen,cursor="dot")
-b2.place(relx=0.52,rely=0.25,relwidth=0.44,relheight=0.30)
+b2.place(relx=0.52,rely=0.25,relwidth=0.43,relheight=0.30)
 
 
 
 b3=Button(f1,image=helppicc,border=0,bg="white",command=whenhelp,cursor="man")
-b3.place(relx=0.05,rely=0.6,relwidth=0.44,relheight=0.30)
+b3.place(relx=0.05,rely=0.6,relwidth=0.43,relheight=0.30)
 
 
 
@@ -422,152 +403,4 @@ b4=Button(f1,image=toolspicc,border=0,bg="white",cursor="diamond_cross")
 b4.place(relx=0.52,rely=0.6,relwidth=0.44,relheight=0.30)
 
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
