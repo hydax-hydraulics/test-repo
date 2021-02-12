@@ -132,7 +132,7 @@ def when_teach():
     def firstphoto():
         image=Image.fromarray(img1)
         file="C:/Users/acer/Desktop/rossa-i/img00"+".jpg"   #file name 
-        cv2.imwrite(file,img1) 
+        cv2.imwrite(file,edge1) 
         #time=str(datetime.datetime.now().today()).replace(":"," ") +".jpg"
         #image.save(time)  
 
@@ -166,36 +166,36 @@ def when_teach():
     bt4=Button(window,image=four1,border=0,bg="white",command=lambda :[fourthphoto(),fourdone()])
     bt4.place(relx=0.63,rely=0.89,relwidth=0.06,relheight=0.08)
 
-    cam = cv2.VideoCapture(0)
-    while True:
-        _,img=cam.read()
-        #WE CAPTURED AN IMAGE as img
-
-
-        img1=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-        #we updated an image and made into store in img1...
-
-        img=ImageTk.PhotoImage(Image.fromarray(img1))
-        #photo image ,we are converting into tkinter image
     
-
-        l1["image"]=img
-        #we have created l1 Label ,where our live video i.e , is stored in (img )is directly linked 
-
-
-        #key=cv2.waitKey(1)
-        #if key==27:
-            #break
+    def getting_live():
+        cam = cv2.VideoCapture(0)
+        while True:
+            _,img=cam.read()
+            #WE CAPTURED AN IMAGE as img
 
 
-        window.update()
+            img1=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+            #we updated an image and made into store in img1..
+            img=ImageTk.PhotoImage(Image.fromarray(img1))
+            #photo image ,we are converting into tkinter image
+            
+            l1["image"]=img
+            #we have created l1 Label ,where our live video i.e , is stored in (img )is directly linked 
+
+
+            #key=cv2.waitKey(1)
+            #if key==27:
+                #break
+
+
+            window.update()
 
 
 
 
 
-        if cv2.waitKey(1)& 0xFF==ord('q'):
-            break
+            if cv2.waitKey(1)& 0xFF==ord('q'):
+                break
     cam.release() 
     cv2.destroyAllWindows()
 
@@ -305,6 +305,8 @@ def whenopen():
     live1=PhotoImage(file="livepic1.png")
     b2=Button(window2,image=live1,border=0,bg="white",command=getting_live)
     b2.place(relx=0.76,rely=0.78,relwidth=0.17,relheight=0.1)
+
+
 
     def displaypic1():
         cam.release()
