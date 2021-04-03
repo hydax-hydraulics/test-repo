@@ -1,0 +1,8 @@
+here is logic for who is interested .
+a= height or width in image , 
+f=  focal length of camera,
+d = distance from camera to object which is constant, 
+h = height or width of object 
+now apply a/f = tan© = h/d 
+so h = a*d/f  
+apply algorithm
